@@ -20,8 +20,12 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewMo
 
     @SuppressLint("SetTextI18n")
     override fun onBinding() {
-        bookListAdapter = BookListAdapter(this)
-
+        bookListAdapter = BookListAdapter(this, object : BookListAdapter.Listener{
+            override fun onImageClicked(arrImage: Array<String>) {
+                supportFragmentManager.beginTransaction().add(R.id.container, ImageSliderFragment(arrImage))
+                    .commit()
+            }
+        })
 
         mBinding.apply {
             recyclerView.layoutManager = LinearLayoutManager(this@DashboardActivity)

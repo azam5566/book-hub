@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 
 
-class BookListAdapter(val context: Context?) : RecyclerView.Adapter<BookListAdapter.MyViewHolder>(){
+class BookListAdapter(val context: Context?, val listener: Listener) : RecyclerView.Adapter<BookListAdapter.MyViewHolder>(){
     private var list = mutableListOf<BookData>()
     private val IMAGE_DIRECTORY = "/BookHub/images/"
 
@@ -28,6 +28,10 @@ class BookListAdapter(val context: Context?) : RecyclerView.Adapter<BookListAdap
         val size: Int = list.size
         list.clear()
         notifyItemRangeRemoved(0, size)
+    }
+
+    interface Listener {
+        fun onImageClicked(arrImage : Array<String>)
     }
 
     inner class MyViewHolder(val itemBinding: ListItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
@@ -45,6 +49,10 @@ class BookListAdapter(val context: Context?) : RecyclerView.Adapter<BookListAdap
             Glide.with(it).asBitmap()
                 .load(Uri.parse(strPath))
                 .into(holder.itemBinding.image)
+        }
+
+        holder.itemBinding.image.setOnClickListener {
+            bookData.coverPhoto?.let { it1 -> listener.onImageClicked(it1) }
         }
     }
 
