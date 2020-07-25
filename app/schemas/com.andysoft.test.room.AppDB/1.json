@@ -1,0 +1,78 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "b1cbe712262afb21c23f4b93776eb4fc",
+    "entities": [
+      {
+        "tableName": "author_data",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`authorName` TEXT NOT NULL, PRIMARY KEY(`authorName`))",
+        "fields": [
+          {
+            "fieldPath": "authorName",
+            "columnName": "authorName",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "authorName"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "books_data",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`authorName` TEXT, `price` REAL, `bookName` TEXT, `coverPhoto` TEXT, `doi` INTEGER NOT NULL, PRIMARY KEY(`doi`))",
+        "fields": [
+          {
+            "fieldPath": "authorName",
+            "columnName": "authorName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bookName",
+            "columnName": "bookName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coverPhoto",
+            "columnName": "coverPhoto",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "doi",
+            "columnName": "doi",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "doi"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b1cbe712262afb21c23f4b93776eb4fc')"
+    ]
+  }
+}
