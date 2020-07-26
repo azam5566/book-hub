@@ -83,27 +83,29 @@ class AddBookFragment : BaseFragment<AddBookFragmentBinding, AddBookViewModel>()
                 Snackbar.make(mBinding.createBook, "Please fill all details", Snackbar.LENGTH_SHORT)
                     .show()
             } else {
+                var imageArray = mutableListOf<String>()
                 image1.value?.let {
                     saveImage(it, date.timeInMillis, "image1")
+                    imageArray.add("image1${date.timeInMillis}.jpg")
                 }
                 image2.value?.let {
                     saveImage(it, date.timeInMillis, "image2")
+                    imageArray.add("image2${date.timeInMillis}.jpg")
                 }
                 image3.value?.let {
                     saveImage(it, date.timeInMillis, "image3")
+                    imageArray.add("image3${date.timeInMillis}.jpg")
                 }
                 CoroutineScope(IO).launch {
+
+
                     userDao.insertBookData(
                         BookData(
                             mBinding.authorName.text.toString(),
                             mBinding.bookName.text.toString(),
                             mBinding.price.text.toString().trim().toFloat(),
                             date.timeInMillis,
-                            arrayOf(
-                                "image1${date.timeInMillis}.jpg",
-                                "image2${date.timeInMillis}.jpg",
-                                "image3${date.timeInMillis}.jpg"
-                            )
+                            imageArray.toTypedArray()
                         )
                     )
 

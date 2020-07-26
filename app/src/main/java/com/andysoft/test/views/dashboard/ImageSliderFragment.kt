@@ -1,7 +1,6 @@
 package com.andysoft.test.views.dashboard
 
 import android.net.Uri
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.andysoft.test.R
@@ -18,20 +17,18 @@ class ImageSliderFragment(val arrImage: Array<String>) :
     override fun getViewModel() = ImageSliderViewModel::class.java
 
     override fun onBinding() {
-//        val arrView = arrayOf(mBinding.image1, mBinding.image2, mBinding.image3)
         for (i in arrImage.indices) {
             val strPath = "file://" + context?.getExternalFilesDir(null)
                 .toString() + IMAGE_DIRECTORY + (arrImage[i])
 
-
-            //ImageView Setup
             //ImageView Setup
             val imageView = ImageView(context)
 
             imageView.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT
             )
+            imageView.scaleType = ImageView.ScaleType.FIT_XY
 
             context?.let {
                 Glide.with(it).asBitmap()
@@ -49,7 +46,7 @@ class ImageSliderFragment(val arrImage: Array<String>) :
             mBinding.viewFlipper.showPrevious()
         }
 
-        mBinding.root.setOnClickListener{
+        mBinding.root.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.remove(this)?.commit()
         }

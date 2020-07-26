@@ -49,8 +49,6 @@
                 android:layout_height="400dp"
                 android:layout_marginStart="@dimen/spacing2"
                 android:layout_marginEnd="@dimen/spacing2"
-                android:background="@drawable/border_all_sides_grey"
-                android:backgroundTint="@color/white"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
